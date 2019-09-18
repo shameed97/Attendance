@@ -44,16 +44,21 @@ public class SignupActivity extends AppCompatActivity {
         final String password = editPass.getText().toString();
         final String con_Pass = editCon.getText().toString();
 
+        //Code For Username,Password is Empty
         if (username.equals("") || password.equals("") || con_Pass.equals("")) {
             builder.setTitle("Something Went Wrong :");
             builder.setMessage("Please Fill All the Fields...");
             displayAlerts("input_error");
+        //End Code For Username,Password is Empty
         }
-        if (!password.equals(con_Pass)) {
+        //Code For Password Mismatch
+        else if (!password.equals(con_Pass)) {
             builder.setTitle("Something Went Wrong :");
             builder.setMessage("Password Mismatch...");
             displayAlerts("Mismatch");
+        //End Code For Password Mismatch
         } else {
+            //Code For Getting Data From Mysql
             StringRequest stringRequest = new StringRequest(Request.Method.POST, insert_Url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -87,10 +92,12 @@ public class SignupActivity extends AppCompatActivity {
             };
 
             MySingleton.getInstance(SignupActivity.this).addToRequest(stringRequest);
+            //Code For Getting Data From Mysql
         }
     }
 
     public void displayAlerts(final String message) {
+        //Code For Alert Dialog
         builder.setCancelable(false);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
@@ -118,6 +125,6 @@ public class SignupActivity extends AppCompatActivity {
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-
+     //End Code For Alert Dialog
     }
 }

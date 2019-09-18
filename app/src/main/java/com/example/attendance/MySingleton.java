@@ -34,4 +34,5 @@ public class MySingleton {
     public <T> void addToRequest(Request<T> request) {
         requestQueue.add(request);
     }
+
 }

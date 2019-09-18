@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private static String retrive_Url = "http://192.168.43.11/attend/login_det.php";
     private EditText editUser, editPass;
     private AlertDialog.Builder builder;
+    private String username,password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,14 +40,19 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void signIn(View view) {
-        final String username = editUser.getText().toString();
-        final String password = editPass.getText().toString();
+        username = editUser.getText().toString();
+        password = editPass.getText().toString();
 
+        //Code For Checking Username and Password Field Empty
         if (username.equals("") || password.equals("")) {
             builder.setTitle("Something Went Wrong :");
             builder.setMessage("Please Fill All The Fields...");
             displayAlerts("input_error");
-        } else {
+        //End Code For Checking Username and Password Field Empty
+        }
+        else
+            {
+            //Code For Getting Data From Mysql
             StringRequest stringRequest = new StringRequest(Request.Method.POST, retrive_Url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
@@ -72,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 }
             }) {
+                //Code For Send Data's to PHP file
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<String, String>();
@@ -79,10 +86,11 @@ public class LoginActivity extends AppCompatActivity {
                     params.put("pass", password);
                     return params;
                 }
+                //End `Code For Send Data's to PHP file
             };
             MySingleton.getInstance(LoginActivity.this).addToRequest(stringRequest);
         }
-
+        //End Code For Getting Data From Mysql
     }
 
 
@@ -92,6 +100,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void displayAlerts(final String message) {
+        //Code For Alert Dialog
         builder.setCancelable(false);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
@@ -102,7 +111,9 @@ public class LoginActivity extends AppCompatActivity {
                     editPass.setText("");
                 }
                 if (message.equals("Login Success...")) {
-                    startActivity(new Intent(LoginActivity.this, WelcomeActivity.class));
+                    Intent intent=new Intent(LoginActivity.this,WelcomeActivity.class);
+                    intent.putExtra("username",username);
+                    startActivity(intent);
                 }
                 if (message.equals("Login Failed...")) {
                     editUser.setText("");
@@ -113,6 +124,6 @@ public class LoginActivity extends AppCompatActivity {
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-
+        //End Code For Alert Dialog
     }
 }

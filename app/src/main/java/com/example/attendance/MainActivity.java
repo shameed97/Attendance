@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Code for Splash Screen
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -20,6 +21,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
         }, SPLASH_TIME);
-
+        //End Code for Splash Screen
     }
 }
