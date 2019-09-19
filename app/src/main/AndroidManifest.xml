@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.attendance">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/icon"
@@ -15,6 +13,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
+        <activity android:name=".NameActivity"></activity>
         <activity android:name=".ClassActivity" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".LoginActivity" />
@@ -30,5 +29,7 @@
             </intent-filter>
         </activity>
     </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WelcomeActivity extends AppCompatActivity {
-    private TextView textStaff, textMobile, textEmail, textQuali, textTime,textDate;
+    private TextView textStaff, textMobile, textEmail, textQuali,textDate;
     private String username;
     private String info_Url = "http://192.168.43.11/attend/staffInfo.php";
 
@@ -40,7 +40,6 @@ public class WelcomeActivity extends AppCompatActivity {
         textMobile = findViewById(R.id.mobile);
         textEmail = findViewById(R.id.email);
         textQuali = findViewById(R.id.qualification);
-        textTime = findViewById(R.id.time);
         textDate=findViewById(R.id.date);
         getResult();
         String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
@@ -89,7 +88,6 @@ public class WelcomeActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("username", username);
-                Log.d("kee", params.toString());
                 return params;
             }
             //End Code For Send Data's to PHP file
@@ -100,6 +98,8 @@ public class WelcomeActivity extends AppCompatActivity {
 
     public void classList(View view) {
 
-        startActivity(new Intent(this, ClassActivity.class));
+        Intent intent=new Intent(WelcomeActivity.this,ClassActivity.class);
+        intent.putExtra("username",username);
+        startActivity(intent);
     }
 }
