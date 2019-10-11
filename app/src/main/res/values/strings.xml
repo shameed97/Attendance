@@ -6,7 +6,7 @@
     <string name="sign_up">Sign Up..?</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="sign_up_">Sign Up</string>
-    <string name="staff_name">Staff Name \t\t\t:</string>
+    <string name="staff_name">Staff Name \t\t:</string>
     <string name="mobile_no">Mobile No \t\t\t\t:</string>
     <string name="mobile_number_will_appear">Mobile Num Will Appear.</string>
     <string name="staff_name_will_appear">Staff Name Will Appear.</string>
@@ -14,9 +14,20 @@
     <string name="email_id_will_appear">Email Id Will Appear.</string>
     <string name="qualification">Qualification :</string>
     <string name="quali_will_appear">Quali Will Appear.</string>
-    <string name="time">Time \t\t\t\t\t\t\t\t\t\t\t\t:</string>
+    <string name="time">Time \t\t\t\t\t\t\t\t\t\t\t:</string>
     <string name="current_time_will_appear">Current Time Will Appear.</string>
     <string name="class_lists">Class Lists</string>
-    <string name="date">Date &amp; Time\t\t :</string>
+    <string name="date">Date &amp; Time\t\t:</string>
     <string name="date_will_appear">Date Will Appear.</string>
+    <string name="name_list">Name List</string>
+    <string name="absent">Absent</string>
+    <string name="present">Present</string>
+    <string name="class_name">Class Name</string>
+    <string name="status">Status</string>
+    <string name="x">X</string>
+    <string name="total">Total \t\t\t\t\t:</string>
+    <string name="_100">100</string>
+    <string name="presen">Present :</string>
+    <string name="absen">Absent \t:</string>
+    <string name="ok">Ok</string>
 </resources>

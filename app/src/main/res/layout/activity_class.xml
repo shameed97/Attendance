@@ -22,6 +22,9 @@
     <ListView
         android:id="@+id/listClass"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:choiceMode="singleChoice"
+        android:dividerHeight="1dp"
+        android:divider="#FF5722"/>
 
 </LinearLayout>

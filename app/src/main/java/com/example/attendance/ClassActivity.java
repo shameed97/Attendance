@@ -1,12 +1,11 @@
 package com.example.attendance;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.android.volley.Request;
@@ -27,49 +26,48 @@ public class ClassActivity extends AppCompatActivity {
     private String username;
     private ListView listView;
     private ListviewAdapter listviewAdapter;
-    private List<String> clName=new ArrayList<>();
+    private List<String> clName = new ArrayList<>();
     private String className;
     private String class_Url = "http://192.168.43.11/attend/classInfo.php";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class);
 
-        Intent intent=getIntent();
-        username=intent.getStringExtra("username");
-        listView=findViewById(R.id.listClass);
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
+        listView = findViewById(R.id.listClass);
         getClassName();
 
     }
 
-    public void getClassName()
-    {
+    public void getClassName() {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, class_Url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
                 try {
-                   Log.d("kee",response);
+                    Log.d("kee", response);
                     JSONObject jsonObject = new JSONObject(response);
                     Log.d("kee", jsonObject.toString());
                     JSONArray jsonArray = jsonObject.getJSONArray("array");
-                    for (int i = 0; i < jsonArray.length(); i++)
-                    {
+                    for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject Object = jsonArray.getJSONObject(i);
 
                         className = Object.getString("class");
-                        Log.d("kee",className);
+                        Log.d("kee", className);
                         clName.add(className);
-                        listviewAdapter=new ListviewAdapter((ArrayList<String>) clName,ClassActivity.this);
-                        Log.d("kee",listviewAdapter.toString());
+                        listviewAdapter = new ListviewAdapter((ArrayList<String>) clName, ClassActivity.this);
+                        Log.d("kee", listviewAdapter.toString());
                         listView.setAdapter(listviewAdapter);
                         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                String value=listviewAdapter.getItem(position);
-                                Log.d("kee",value);
-                                Intent intent=new Intent(ClassActivity.this,NameActivity.class);
-                                intent.putExtra("value",value);
+                                String value = listviewAdapter.getItem(position);
+                                Log.d("kee", value);
+                                Intent intent = new Intent(ClassActivity.this, NameActivity.class);
+                                intent.putExtra("value", value);
                                 startActivity(intent);
                             }
                         });
@@ -93,7 +91,7 @@ public class ClassActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("username",username);
+                params.put("username", username);
                 Log.d("kee", params.toString());
                 return params;
             }
