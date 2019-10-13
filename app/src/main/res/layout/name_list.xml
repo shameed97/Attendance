@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/listItemLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:padding="5dp"
+    android:background="@color/black">
+
+    <TextView
+
+        android:id="@+id/naList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:text="@string/class_lists"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioGroup"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rbt1"
+                android:textSize="22sp"
+                android:text="@string/present"
+                android:textColor="@color/white"
+                android:buttonTint="@color/white"
+                android:layout_marginStart="30dp" />
+
+            <RadioButton
+                android:id="@+id/rbt2"
+                android:layout_marginTop="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:layout_marginLeft="120dp"
+                android:buttonTint="@color/white"
+                android:text="@string/absent"
+                android:textColor="@color/white"
+                android:textSize="22sp" />
+
+
+        </RadioGroup>
+
+
+
+</RelativeLayout>
