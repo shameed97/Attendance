@@ -64,9 +64,7 @@ public class NameActivity extends AppCompatActivity {
 
                 try {
 
-                    Log.d("kee", response);
                     JSONObject jsonObject = new JSONObject(response);
-                    Log.d("kee", jsonObject.toString());
                     JSONArray jsonArray = jsonObject.getJSONArray("array");
 
                     for (int i = 0; i < jsonArray.length(); i++) {
@@ -74,8 +72,6 @@ public class NameActivity extends AppCompatActivity {
                         count++;
                         name = Object.getString("name");
                         rollno = Object.getString("rollno");
-                        Log.d("kee", name);
-                        Log.d("kee", rollno);
                         naName.add(count + "." + name + "-" + rollno);
                     }
                     cou=""+count;
@@ -102,7 +98,6 @@ public class NameActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("value", value);
-                Log.d("kee", params.toString());
                 return params;
             }
             //End Code For Send Data's to PHP file
@@ -125,9 +120,7 @@ public class NameActivity extends AppCompatActivity {
             public void onResponse(String response) {
 
                 try {
-                    Log.d("sha", response);
                     JSONObject jsonObject = new JSONObject(response);
-                    Log.d("sha", jsonObject.toString());
                     JSONArray jsonArray = jsonObject.getJSONArray("array");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject Object = jsonArray.getJSONObject(i);
@@ -160,7 +153,6 @@ public class NameActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("classname", value);
-                Log.d("kee", params.toString());
                 return params;
             }
             //End Code For Send Data's to PHP file

@@ -2,8 +2,6 @@ package com.example.attendance;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -24,7 +22,6 @@ import com.android.volley.toolbox.StringRequest;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +32,7 @@ public class NameViewAdapter extends ArrayAdapter {
 
     private ArrayList<String> naName = new ArrayList<>();
     private Context context;
-    private String  pos_value, sp_name, sp_roll,na;
+    private String pos_value, sp_name, sp_roll, na;
     private String AP_url = "http://192.168.43.11/attend/daily.php";
     private String result = "Present";
     private String result1 = "Absent";
@@ -60,21 +57,16 @@ public class NameViewAdapter extends ArrayAdapter {
         radioGroup = row.findViewById(R.id.radioGroup);
         rb1 = row.findViewById(R.id.rbt1);
         rb2 = row.findViewById(R.id.rbt2);
-        textView1=((Activity) context).findViewById(R.id.className);
-        na=textView1.getText().toString();
-        Log.d("k",na);
+        textView1 = ((Activity) context).findViewById(R.id.className);
+        na = textView1.getText().toString();
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                Log.d("kee", "OnChecked Working");
                 pos_value = naName.get(position);
-                Log.d("kee", "pos_value" + pos_value);
                 String[] sp_values = pos_value.split("-");
                 sp_name = sp_values[0];
                 sp_roll = sp_values[1];
-                Log.d("kee1", sp_name);
-                Log.d("kee1", sp_roll);
                 switch (checkedId) {
                     case R.id.rbt1:
                         StringRequest stringRequest = new StringRequest(Request.Method.POST, AP_url, new Response.Listener<String>() {
@@ -103,7 +95,7 @@ public class NameViewAdapter extends ArrayAdapter {
                             @Override
                             protected Map<String, String> getParams() throws AuthFailureError {
                                 Map<String, String> params = new HashMap<String, String>();
-                                Log.d("sha", "Its working");
+                                Log.d("sha", "Values Sent");
                                 params.put("name", sp_name);
                                 params.put("roll", sp_roll);
                                 params.put("class", na);
@@ -142,6 +134,7 @@ public class NameViewAdapter extends ArrayAdapter {
                             @Override
                             protected Map<String, String> getParams() throws AuthFailureError {
                                 Map<String, String> params = new HashMap<String, String>();
+                                Log.d("sha","Values Sent");
                                 params.put("name", sp_name);
                                 params.put("roll", sp_roll);
                                 params.put("class", na);
@@ -156,7 +149,6 @@ public class NameViewAdapter extends ArrayAdapter {
 
         return row;
     }
-
 
 
 }

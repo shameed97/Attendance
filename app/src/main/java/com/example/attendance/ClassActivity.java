@@ -48,24 +48,19 @@ public class ClassActivity extends AppCompatActivity {
             public void onResponse(String response) {
 
                 try {
-                    Log.d("kee", response);
                     JSONObject jsonObject = new JSONObject(response);
-                    Log.d("kee", jsonObject.toString());
                     JSONArray jsonArray = jsonObject.getJSONArray("array");
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject Object = jsonArray.getJSONObject(i);
 
                         className = Object.getString("class");
-                        Log.d("kee", className);
                         clName.add(className);
                         listviewAdapter = new ListviewAdapter((ArrayList<String>) clName, ClassActivity.this);
-                        Log.d("kee", listviewAdapter.toString());
                         listView.setAdapter(listviewAdapter);
                         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                 String value = listviewAdapter.getItem(position);
-                                Log.d("kee", value);
                                 Intent intent = new Intent(ClassActivity.this, NameActivity.class);
                                 intent.putExtra("value", value);
                                 startActivity(intent);
@@ -92,7 +87,6 @@ public class ClassActivity extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("username", username);
-                Log.d("kee", params.toString());
                 return params;
             }
             //End Code For Send Data's to PHP file
