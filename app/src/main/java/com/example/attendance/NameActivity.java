@@ -1,22 +1,15 @@
 package com.example.attendance;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AbsListView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -29,17 +22,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class NameActivity extends AppCompatActivity {
 
     private ListView listView;
     private TextView textView;
-    private String value, name, rollno,cou,pre,abs;
+    private String value, name, rollno, cou, pre, abs;
     private NameAdapter nameviewAdapter;
     private ArrayList<name> naName = new ArrayList<name>();
     private String name_Url = "http://192.168.43.11/attend/name.php";
@@ -60,7 +50,7 @@ public class NameActivity extends AppCompatActivity {
         listView = findViewById(R.id.listName);
         textView = findViewById(R.id.className);
         textView.setText(value);
-        dialog=new Dialog(this);
+        dialog = new Dialog(this);
         getClassName();
 
     }
@@ -80,12 +70,12 @@ public class NameActivity extends AppCompatActivity {
                         count++;
                         name = Object.getString("name");
                         rollno = Object.getString("rollno");
-                        name na=new name(String.valueOf(count),name,rollno);
+                        name na = new name(String.valueOf(count), name, rollno);
                         naName.add(na);
                     }
-                    cou=""+count;
-                            nameviewAdapter = new NameAdapter(NameActivity.this,naName);
-                            listView.setAdapter(nameviewAdapter);
+                    cou = "" + count;
+                    nameviewAdapter = new NameAdapter(NameActivity.this, naName);
+                    listView.setAdapter(nameviewAdapter);
 
 
                 } catch (JSONException e) {
@@ -120,7 +110,7 @@ public class NameActivity extends AppCompatActivity {
         dialog.setContentView(R.layout.status_pop);
         dialog.setCancelable(false);
         close = dialog.findViewById(R.id.txtClose);
-        button=dialog.findViewById(R.id.butRound2);
+        button = dialog.findViewById(R.id.butRound2);
         present = dialog.findViewById(R.id.present);
         absent = dialog.findViewById(R.id.absent);
         total = dialog.findViewById(R.id.total);
@@ -135,8 +125,8 @@ public class NameActivity extends AppCompatActivity {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject Object = jsonArray.getJSONObject(i);
 
-                        pre= Object.getString("pre");
-                        abs= Object.getString("abs");
+                        pre = Object.getString("pre");
+                        abs = Object.getString("abs");
 
                         present.setText(pre);
                         absent.setText(abs);

@@ -49,14 +49,14 @@ public class SignupActivity extends AppCompatActivity {
             builder.setTitle("Something Went Wrong :");
             builder.setMessage("Please Fill All the Fields...");
             displayAlerts("input_error");
-        //End Code For Username,Password is Empty
+            //End Code For Username,Password is Empty
         }
         //Code For Password Mismatch
         else if (!password.equals(con_Pass)) {
             builder.setTitle("Something Went Wrong :");
             builder.setMessage("Password Mismatch...");
             displayAlerts("Mismatch");
-        //End Code For Password Mismatch
+            //End Code For Password Mismatch
         } else {
             //Code For Getting Data From Mysql
             StringRequest stringRequest = new StringRequest(Request.Method.POST, insert_Url, new Response.Listener<String>() {
@@ -125,6 +125,6 @@ public class SignupActivity extends AppCompatActivity {
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
-     //End Code For Alert Dialog
+        //End Code For Alert Dialog
     }
 }
