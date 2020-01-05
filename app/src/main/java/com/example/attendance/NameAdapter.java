@@ -1,14 +1,13 @@
 package com.example.attendance;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -25,48 +24,84 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class NameViewAdapter extends ArrayAdapter {
+public class NameAdapter extends BaseAdapter {
 
-
-    private ArrayList<String> naName = new ArrayList<>();
-    private Context context;
-    private String pos_value, sp_name, sp_roll, na;
+    private ArrayList<name> arrayList = new ArrayList<>();
+    private List<name> naName;
+    private String  sp_name, sp_roll, na;
     private String AP_url = "http://192.168.43.11/attend/daily.php";
     private String result = "Present";
     private String result1 = "Absent";
+    private Context Mcontext;
+    private LayoutInflater inflater;
+    private String name, rollno, cou;
     private RadioGroup radioGroup;
     private RadioButton rb1, rb2;
-    private TextView textView1;
 
-    public NameViewAdapter(ArrayList<String> naName, Context context) {
-        super(context, R.layout.name_list, naName);
-        this.context = context;
+    public NameAdapter(Context context, List<name> naName) {
+        Mcontext = context;
         this.naName = naName;
+        this.arrayList.addAll(naName);
+        inflater = LayoutInflater.from(Mcontext);
     }
 
-    @NonNull
     @Override
-    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        LayoutInflater layoutInflater = ((Activity) context).getLayoutInflater();
-        View row = layoutInflater.inflate(R.layout.name_list, parent, false);
-        final TextView textView = row.findViewById(R.id.naList);
-        textView.setText(naName.get(position));
-        assert convertView != null;
+    public int getCount() {
+        return naName.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return naName.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    static class ProductHolder {
+        TextView textView, textView1;
+    }
+
+    @SuppressLint("SetTextI18n")
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+
+        View row = convertView;
+        ProductHolder productHolder;
+        if (convertView == null) {
+            row = inflater.inflate(R.layout.name_list, null);
+            productHolder = new ProductHolder();
+            productHolder.textView = row.findViewById(R.id.naList);
+
+            productHolder.textView1 = ((Activity) Mcontext).findViewById(R.id.className);
+            na = productHolder.textView1.getText().toString();
+
+            row.setTag(productHolder);
+        } else {
+            productHolder = (ProductHolder) row.getTag();
+        }
+
+        final name det = (name) getItem(position);
+        cou = det.getCount();
+        name = det.getName();
+        rollno = det.getRollNo();
+        productHolder.textView.setText(cou + "." + name + "-" + rollno);
+
         radioGroup = row.findViewById(R.id.radioGroup);
         rb1 = row.findViewById(R.id.rbt1);
         rb2 = row.findViewById(R.id.rbt2);
-        textView1 = ((Activity) context).findViewById(R.id.className);
-        na = textView1.getText().toString();
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                pos_value = naName.get(position);
-                String[] sp_values = pos_value.split("-");
-                sp_name = sp_values[0];
-                sp_roll = sp_values[1];
+                sp_name = det.getCount()+"."+det.getName();
+                sp_roll = det.getRollNo();
+                Log.d("sha","working 2");
                 switch (checkedId) {
                     case R.id.rbt1:
                         StringRequest stringRequest = new StringRequest(Request.Method.POST, AP_url, new Response.Listener<String>() {
@@ -103,7 +138,7 @@ public class NameViewAdapter extends ArrayAdapter {
                                 return params;
                             }
                         };
-                        MySingleton.getInstance(context).addToRequest(stringRequest);
+                        MySingleton.getInstance(Mcontext).addToRequest(stringRequest);
 
                         break;
                     case R.id.rbt2:
@@ -134,7 +169,7 @@ public class NameViewAdapter extends ArrayAdapter {
                             @Override
                             protected Map<String, String> getParams() throws AuthFailureError {
                                 Map<String, String> params = new HashMap<String, String>();
-                                Log.d("sha","Values Sent");
+                                Log.d("sha", "Values Sent");
                                 params.put("name", sp_name);
                                 params.put("roll", sp_roll);
                                 params.put("class", na);
@@ -142,10 +177,19 @@ public class NameViewAdapter extends ArrayAdapter {
                                 return params;
                             }
                         };
-                        MySingleton.getInstance(context).addToRequest(stringRequest1);
+                        MySingleton.getInstance(Mcontext).addToRequest(stringRequest1);
                 }
             }
         });
+
+        //OnClickListener for Listview row Click
+        row.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        // End OnClickListener for Listview row Click
 
         return row;
     }

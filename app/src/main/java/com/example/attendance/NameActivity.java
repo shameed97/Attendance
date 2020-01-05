@@ -1,15 +1,22 @@
 package com.example.attendance;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AbsListView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -22,6 +29,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,8 +40,8 @@ public class NameActivity extends AppCompatActivity {
     private ListView listView;
     private TextView textView;
     private String value, name, rollno,cou,pre,abs;
-    private NameViewAdapter nameviewAdapter;
-    private List<String> naName = new ArrayList<>();
+    private NameAdapter nameviewAdapter;
+    private ArrayList<name> naName = new ArrayList<name>();
     private String name_Url = "http://192.168.43.11/attend/name.php";
     private String St_url = "http://192.168.43.11/attend/status.php";
     private Dialog dialog;
@@ -66,18 +75,18 @@ public class NameActivity extends AppCompatActivity {
 
                     JSONObject jsonObject = new JSONObject(response);
                     JSONArray jsonArray = jsonObject.getJSONArray("array");
-
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject Object = jsonArray.getJSONObject(i);
                         count++;
                         name = Object.getString("name");
                         rollno = Object.getString("rollno");
-                        naName.add(count + "." + name + "-" + rollno);
+                        name na=new name(String.valueOf(count),name,rollno);
+                        naName.add(na);
                     }
                     cou=""+count;
+                            nameviewAdapter = new NameAdapter(NameActivity.this,naName);
+                            listView.setAdapter(nameviewAdapter);
 
-                    nameviewAdapter = new NameViewAdapter((ArrayList<String>) naName, NameActivity.this);
-                    listView.setAdapter(nameviewAdapter);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -104,6 +113,7 @@ public class NameActivity extends AppCompatActivity {
         };
         MySingleton.getInstance(NameActivity.this).addToRequest(stringRequest);
     }
+
 
     public void getStatus(View view) {
 
@@ -176,4 +186,5 @@ public class NameActivity extends AppCompatActivity {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
     }
+
 }
