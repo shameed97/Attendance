@@ -29,7 +29,7 @@ public class NameActivity extends AppCompatActivity {
 
     private ListView listView;
     private TextView textView;
-    private String value, name, rollno, cou, pre, abs;
+    private String value, name, rollno, cou, pre, abs, mobile;
     private NameAdapter nameviewAdapter;
     private ArrayList<name> naName = new ArrayList<name>();
     private String name_Url = "http://192.168.43.11/attend/name.php";
@@ -70,7 +70,8 @@ public class NameActivity extends AppCompatActivity {
                         count++;
                         name = Object.getString("name");
                         rollno = Object.getString("rollno");
-                        name na = new name(String.valueOf(count), name, rollno);
+                        mobile = Object.getString("mobile");
+                        name na = new name(String.valueOf(count), name, rollno,mobile);
                         naName.add(na);
                     }
                     cou = "" + count;

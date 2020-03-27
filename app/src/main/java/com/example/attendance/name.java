@@ -2,12 +2,13 @@ package com.example.attendance;
 
 public class name {
 
-    private String Name, Count, rollNo;
+    private String Name, Count, rollNo,Mobile;
 
-    public name(String count, String name, String rollNo) {
+    public name(String count, String name, String rollNo, String mobile) {
         this.Count = count;
         this.Name = name;
         this.rollNo = rollNo;
+        Mobile = mobile;
     }
 
 
@@ -21,5 +22,9 @@ public class name {
 
     public String getRollNo() {
         return rollNo;
+    }
+
+    public String getMobile() {
+        return Mobile;
     }
 }

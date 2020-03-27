@@ -3,6 +3,8 @@ package com.example.attendance;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.telephony.SmsManager;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,13 +34,13 @@ public class NameAdapter extends BaseAdapter {
 
     private ArrayList<name> arrayList = new ArrayList<>();
     private List<name> naName;
-    private String  sp_name, sp_roll, na;
+    private String sp_name, sp_roll, na;
     private String AP_url = "http://192.168.43.11/attend/daily.php";
     private String result = "Present";
     private String result1 = "Absent";
     private Context Mcontext;
     private LayoutInflater inflater;
-    private String name, rollno, cou;
+    private String name, rollno, cou, mobile_no;
     private RadioGroup radioGroup;
     private RadioButton rb1, rb2;
 
@@ -99,9 +102,10 @@ public class NameAdapter extends BaseAdapter {
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                sp_name = det.getCount()+"."+det.getName();
+                sp_name = det.getCount() + "." + det.getName();
                 sp_roll = det.getRollNo();
-                Log.d("sha","working 2");
+                mobile_no = det.getMobile();
+                Log.d("sha", "working 2");
                 switch (checkedId) {
                     case R.id.rbt1:
                         StringRequest stringRequest = new StringRequest(Request.Method.POST, AP_url, new Response.Listener<String>() {
@@ -115,6 +119,9 @@ public class NameAdapter extends BaseAdapter {
                                     String message = jsonObject.getString("message");
                                     Log.d("sha", message);
                                     Log.d("sha", code);
+                                    if (message.equals("Thanks For Using....!")) {
+                                        sendSms(result);
+                                    }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -154,6 +161,10 @@ public class NameAdapter extends BaseAdapter {
                                     String message = jsonObject.getString("message");
                                     Log.d("sha", code);
                                     Log.d("sha", message);
+                                    if (message.equals("Thanks For Using....!")) {
+                                        sendSms(result1);
+
+                                    }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -192,6 +203,15 @@ public class NameAdapter extends BaseAdapter {
         // End OnClickListener for Listview row Click
 
         return row;
+    }
+
+    public void sendSms(String res) {
+        //Code for SMS
+        Date d = new Date();
+        CharSequence s = DateFormat.format("MMMM d, yyyy ", d.getTime());
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(mobile_no, null, "ROLL NO : " + sp_roll + " \nGreetings from College,\n " + sp_name + " is " + res + " on " + s + "\n Thank You...!", null, null);
+        //Code for SMS
     }
 
 

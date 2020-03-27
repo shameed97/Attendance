@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/listItemLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -32,11 +32,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/rbt1"
-                android:textSize="22sp"
+                android:textSize="19sp"
                 android:text="@string/present"
                 android:textColor="@color/white"
                 android:buttonTint="@color/white"
-                android:layout_marginStart="30dp" />
+                android:layout_marginStart="30dp"
+                tools:targetApi="lollipop" />
 
             <RadioButton
                 android:id="@+id/rbt2"
@@ -48,7 +49,8 @@
                 android:buttonTint="@color/white"
                 android:text="@string/absent"
                 android:textColor="@color/white"
-                android:textSize="22sp" />
+                android:textSize="19sp"
+                tools:targetApi="lollipop" />
 
 
         </RadioGroup>
