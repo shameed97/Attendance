@@ -11,20 +11,32 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:text="@string/class_lists"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:layout_gravity="center"
-        android:textStyle="bold"
         android:textSize="25sp"
-        android:layout_marginTop="10dp"/>
+        android:textStyle="bold" />
 
     <ListView
         android:id="@+id/listClass"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:choiceMode="singleChoice"
+        android:divider="#FF5722"
         android:dividerHeight="1dp"
-        android:divider="#FF5722"/>
+        android:footerDividersEnabled="true" />
+
+    <TextView
+        android:id="@+id/emptyText"
+        android:layout_marginTop="150dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:text="@string/list_empty"
+        android:textColor="@color/white"
+        android:textSize="25sp" />
 
 </LinearLayout>

@@ -30,4 +30,6 @@
     <string name="presen">Present :</string>
     <string name="absen">Absent \t:</string>
     <string name="ok">Ok</string>
+    <string name="hours_list">Hours List</string>
+    <string name="list_empty">List Empty...</string>
 </resources>

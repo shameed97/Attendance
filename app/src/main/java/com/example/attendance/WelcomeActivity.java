@@ -98,7 +98,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     public void classList(View view) {
 
-        Intent intent=new Intent(WelcomeActivity.this,ClassActivity.class);
+        Intent intent=new Intent(WelcomeActivity.this,HourActivity.class);
         intent.putExtra("username",username);
         startActivity(intent);
     }
