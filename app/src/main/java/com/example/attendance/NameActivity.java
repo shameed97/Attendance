@@ -29,7 +29,7 @@ public class NameActivity extends AppCompatActivity {
 
     private ListView listView;
     private TextView textView;
-    private String value, name, rollno, cou, pre, abs, mobile;
+    private String name, rollno, cou, pre, abs, mobile, value, hour;
     private NameAdapter nameviewAdapter;
     private ArrayList<name> naName = new ArrayList<name>();
     private String name_Url = "http://192.168.43.11/attend/name.php";
@@ -45,8 +45,10 @@ public class NameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_name);
 
         Intent intent = getIntent();
-        value = intent.getStringExtra("value");
-
+        String[] values = intent.getStringArrayExtra("value");
+        value = values[0];
+        hour = values[1];
+        Log.e("kee",hour);
         listView = findViewById(R.id.listName);
         textView = findViewById(R.id.className);
         textView.setText(value);
@@ -71,7 +73,7 @@ public class NameActivity extends AppCompatActivity {
                         name = Object.getString("name");
                         rollno = Object.getString("rollno");
                         mobile = Object.getString("mobile");
-                        name na = new name(String.valueOf(count), name, rollno,mobile);
+                        name na = new name(String.valueOf(count), name, rollno, mobile,hour);
                         naName.add(na);
                     }
                     cou = "" + count;

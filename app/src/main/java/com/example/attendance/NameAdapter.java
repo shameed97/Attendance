@@ -40,7 +40,7 @@ public class NameAdapter extends BaseAdapter {
     private String result1 = "Absent";
     private Context Mcontext;
     private LayoutInflater inflater;
-    private String name, rollno, cou, mobile_no;
+    private String name, rollno, cou, mobile_no, hour;
     private RadioGroup radioGroup;
     private RadioButton rb1, rb2;
 
@@ -105,6 +105,8 @@ public class NameAdapter extends BaseAdapter {
                 sp_name = det.getCount() + "." + det.getName();
                 sp_roll = det.getRollNo();
                 mobile_no = det.getMobile();
+                hour = det.getHour();
+                Log.e("kee_check",hour);
                 Log.d("sha", "working 2");
                 switch (checkedId) {
                     case R.id.rbt1:
@@ -210,7 +212,7 @@ public class NameAdapter extends BaseAdapter {
         Date d = new Date();
         CharSequence s = DateFormat.format("MMMM d, yyyy ", d.getTime());
         SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage(mobile_no, null, "ROLL NO : " + sp_roll + " \nGreetings from College,\n " + sp_name + " is " + res + " on " + s + "\n Thank You...!", null, null);
+        smsManager.sendTextMessage(mobile_no, null, "ROLL NO : " + sp_roll + " \nGreetings from College,\n " + sp_name + " is " + res + " on " + hour + " at " + s + "\n Thank You...!", null, null);
         //Code for SMS
     }
 
